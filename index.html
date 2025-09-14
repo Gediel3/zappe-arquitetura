@@ -628,6 +628,101 @@ cite {font-weight:700;}
     .hero-content p{font-size:1rem;}
     .cta-button{padding:10px 20px;}
 }
+:root {
+    --color-primary: #4B0E1A;   /* Bordô escuro (cabeçalho/rodapé) */
+    --color-secondary: #F8F3F5; /* Fundo suave rosado/cinza claro */
+    --color-accent: #800020;    /* Vinho principal (botões/destaques) */
+    --color-text: #2c2c2c;      /* Texto */
+    --color-white: #ffffff;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+/* Geral */
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-white);
+    color: var(--color-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Botão CTA */
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    padding: 12px 25px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.cta-button:hover {
+    background-color: #66001a; /* tom mais escuro do vinho */
+    transform: translateY(-2px);
+}
+
+/* Cabeçalho */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 1000;
+    transition: background-color 0.4s ease, padding 0.4s ease;
+}
+.main-header.scrolled {
+    background-color: rgba(75, 14, 26, 0.9); /* vinho transparente */
+    padding: 15px 0;
+    backdrop-filter: blur(5px);
+}
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.8em;
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 700;
+}
+.main-header nav a {
+    color: var(--color-white);
+}
+.main-header nav a::after {
+    background-color: var(--color-accent);
+}
+
+/* Seções */
+#portfolio, #depoimentos {
+    background-color: var(--color-secondary);
+}
+.step i {
+    color: var(--color-accent);
+}
+blockquote::before {
+    color: var(--color-accent);
+}
+
+/* Formulário */
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    border-color: var(--color-accent);
+}
+.contact-info i {
+    color: var(--color-accent);
+}
+.social-links a:hover {
+    color: var(--color-accent);
+}
+
+/* Rodapé */
+.main-footer {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    text-align: center;
+    padding: 20px 0;
+}
+
 
     </style>
 </head>
@@ -780,7 +875,7 @@ cite {font-weight:700;}
     </section>
 
     <footer class="main-footer">
-        <p>&copy; 2025 Zappe Arquitetura. Todos os direitos reservados.</p>
+        <p>&copy; 2025 Gediel Tecnologia . Todos os direitos reservados.</p>
     </footer>
 <script>
 function enviarWhatsApp(event) {
@@ -855,6 +950,7 @@ function enviarWhatsApp(event) {
             });
 
         });
+        
     </script>
     <!-- Botão WhatsApp -->
 <a href="https://wa.me/55996161066" target="_blank" id="whatsappButton">
