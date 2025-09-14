@@ -662,17 +662,7 @@ cite {font-weight:700;}
 </section>
 
 
-    <section id="sobre" class="container">
-        <div class="about-content">
-            <div class="about-text">
-                <h2>Arquitetura que respira.</h2>
-                <p>Acreditamos que a arquitetura transcende a construção. É a arte de esculpir a luz, de orquestrar os materiais e de criar espaços que não apenas abrigam, mas inspiram. Na Zappe, cada linha tem um propósito, cada projeto conta uma história.</p>
-            </div>
-            <div class="about-image">
-                <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Equipe de arquitetos discutindo um projeto">
-            </div>
-        </div>
-    </section>
+    
 
     <section id="quem-somos" class="container">
         <div class="about-content">
@@ -866,5 +856,37 @@ function enviarWhatsApp(event) {
 
         });
     </script>
+    <!-- Botão WhatsApp -->
+<a href="https://wa.me/55996161066" target="_blank" id="whatsappButton">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<style>
+#whatsappButton {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#whatsappButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+@media(max-width:576px){
+    #whatsappButton {width:50px; height:50px; font-size:24px; bottom:20px; right:20px;}
+}
+</style>
+
 </body>
 </html>
