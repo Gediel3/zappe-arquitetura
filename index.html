@@ -3,989 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zappe Arquitetura</title>
-    <meta name="description" content="Escritório de arquitetura focado em criar espaços que inspiram, unindo forma e função em perfeita harmonia.">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="icon" type="image/png" sizes="32x32" href="2.jpg">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <title>Gerador de Sinais Aviator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* ------------------- */
-        /* RESET E VARIÁVEIS GLOBAIS */
-        /* ------------------- */
-        :root {
-            --color-primary: #1a1a1a;
-            --color-secondary: #f5f5f5;
-            --color-accent: #c5a47e;
-            --color-text: #333;
-            --color-white: #ffffff;
-            --font-heading: 'Playfair Display', serif;
-            --font-body: 'Montserrat', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
-        }
-
+        /* Configuração de fonte padrão e fundo escuro */
         body {
-            font-family: var(--font-body);
-            background-color: var(--color-white);
-            color: var(--color-text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-heading);
-            color: var(--color-primary);
-            font-weight: 700;
-        }
-
-        section {
-            padding: 80px 0;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--color-accent);
-            color: var(--color-white);
-            padding: 12px 25px;
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: #b3926c;
-            transform: translateY(-2px);
-        }
-
-        /* ------------------- */
-        /* CABEÇALHO */
-        /* ------------------- */
-        .main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 0;
-            z-index: 1000;
-            transition: background-color 0.4s ease, padding 0.4s ease;
-        }
-        
-        .main-header.scrolled {
-            background-color: rgba(26, 26, 26, 0.9);
-            padding: 15px 0;
-            backdrop-filter: blur(5px);
-        }
-
-        .main-header .container {
+            font-family: 'Inter', sans-serif;
+            /* Mais escuro, com gradiente sutil para profundidade */
+            background-color: #0e0d1b; 
+            background-image: radial-gradient(circle at center, #1b1932 1%, #0e0d1b 100%);
+            color: #ffffff;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: var(--font-heading);
-            font-size: 1.8em;
-            color: var(--color-white);
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        .main-header nav ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-        }
-
-        .main-header nav a {
-            color: var(--color-white);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding-bottom: 5px;
-        }
-        
-        .main-header nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--color-accent);
-            transition: width 0.3s ease;
-        }
-        
-        .main-header nav a:hover::after {
-            width: 100%;
-        }
-
-        /* ------------------- */
-        /* SEÇÃO HERO */
-        /* ------------------- */
-        #hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            text-align: center;
-            color: var(--color-white);
-            position: relative;
-            padding: 0;
-        }
-        
-
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -2;
-        }
-
-        .video-background video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        #hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            color: var(--color-white);
-            margin-bottom: 20px;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-
-        /* ------------------- */
-        /* SEÇÃO SOBRE */
-        /* ------------------- */
-        #sobre {
-            background-color: var(--color-white);
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
             align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        /* ------------------- */
-        /* SEÇÃO QUEM SOU EU */
-        /* ------------------- */
-        #quem-somos {
-            background-color: var(--color-white);
-        }
-
-        #quem-somos .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        #quem-somos .about-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        /* ------------------- */
-        /* SEÇÃO PORTFÓLIO */
-        /* ------------------- */
-        #portfolio {
-            background-color: var(--color-secondary);
-        }
-
-        #portfolio h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-        }
-
-        .portfolio-filters {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .filter-btn {
-            background: none;
-            border: 1px solid #ccc;
-            padding: 10px 20px;
-            margin: 0 5px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .filter-btn:hover, .filter-btn.active {
-            background-color: var(--color-accent);
-            color: var(--color-white);
-            border-color: var(--color-accent);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 5px;
-            cursor: pointer;
-            display: block;
-        }
-        
-        .portfolio-item.hide {
-            display: none;
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .portfolio-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .portfolio-item .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            min-height: 100vh;
             padding: 20px;
-            color: var(--color-white);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+        }
+
+        /* Animação de carregamento simulado */
+        .loading-animation {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #f97316; /* Laranja da chama */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Estilo da caixa de sinal - efeito de néon/brilho aprimorado */
+        .signal-box {
+            background-color: #1f1d36; /* Fundo mais escuro/roxo */
+            border: 1px solid #3c3b5d; /* Borda sutil */
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.5), 0 0 10px rgba(249, 115, 22, 0.2); /* Brilho laranja mais forte */
         }
         
-        .portfolio-item:hover .overlay {
-            opacity: 1;
-        }
-        
-        .overlay h3 {
-            color: var(--color-white);
-            transform: translateY(20px);
-            transition: transform 0.4s ease;
+        .signal-multiplier {
+            /* Efeito de néon mais intenso */
+            text-shadow: 0 0 15px #f97316, 0 0 30px #fb923c;
+            transition: all 0.3s ease-in-out;
+            color: #f97316; /* Garante que o texto base seja laranja */
         }
 
-        .overlay span {
-            transform: translateY(20px);
-            transition: transform 0.4s ease 0.1s;
-        }
-        
-        .portfolio-item:hover .overlay h3, .portfolio-item:hover .overlay span {
-            transform: translateY(0);
+        /* Estilo para a caixa de resultado individual */
+        .result-card {
+            background-color: #272744;
+            border: 1px solid #3c3b5d;
         }
 
-        /* ------------------- */
-        /* SEÇÃO PROCESSO */
-        /* ------------------- */
-        #processo h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
+        /* Classe para o botão: Laranja vibrante com sombra */
+        .btn-primary {
+            background-color: #f97316;
+            box-shadow: 0 8px 15px rgba(249, 115, 22, 0.5); /* Sombra 3D/Pop */
+            transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s, opacity 0.3s; /* Adicionado opacity para o cooldown */
         }
-        
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            text-align: center;
+        .btn-primary:hover:not(:disabled) { /* Apenas efeito hover se não estiver disabled */
+            background-color: #fb923c;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.7);
         }
-        
-        .step i {
-            font-size: 2.5rem;
-            color: var(--color-accent);
-            margin-bottom: 20px;
-        }
-        
-        .step h3 {
-            margin-bottom: 10px;
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0px);
+            box-shadow: 0 5px 10px rgba(249, 115, 22, 0.4);
         }
 
-        /* ------------------- */
-        /* SEÇÃO DEPOIMENTOS */
-        /* ------------------- */
-        #depoimentos {
-            background-color: var(--color-secondary);
-            text-align: center;
+        /* Estilo da barra de progresso */
+        .confidence-bar-bg {
+            background-color: #3c3b5d;
         }
-        
-        #depoimentos .container {
-            max-width: 800px;
+        .confidence-bar-fill {
+            /* Adiciona uma transição suave para a animação da barra */
+            transition: width 1s ease-out; 
+            background-image: linear-gradient(to right, #4ade80, #10b981); /* Gradiente verde */
         }
-        
-        #depoimentos h2 {
-             font-size: 2.5rem;
-            margin-bottom: 40px;
-        }
-        
-        blockquote {
-            font-size: 1.5rem;
-            font-style: italic;
-            font-family: var(--font-heading);
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        blockquote::before {
-            content: '\f10d';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: var(--color-accent);
-            font-size: 2rem;
-            position: absolute;
-            top: -20px;
-            left: -30px;
-            opacity: 0.5;
-        }
-        
-        cite {
-            font-weight: 700;
-        }
-
-        /* ------------------- */
-        /* SEÇÃO CONTATO */
-        /* ------------------- */
-        #contato h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: var(--font-body);
-        }
-        
-        .contact-form input:focus, .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--color-accent);
-        }
-        
-        .contact-form button {
-            width: 100%;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .contact-info p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-        
-        .contact-info i {
-            color: var(--color-accent);
-            margin-right: 15px;
-            width: 20px;
-        }
-        
-        .social-links a {
-            color: var(--color-primary);
-            font-size: 1.5rem;
-            margin-right: 20px;
-            transition: color 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            color: var(--color-accent);
-        }
-        
-        /* ------------------- */
-        /* RODAPÉ */
-        /* ------------------- */
-        .main-footer {
-            background-color: var(--color-primary);
-            color: var(--color-secondary);
-            text-align: center;
-            padding: 20px 0;
-            margin-top: -1px;
-        }
-
-        /* ------------------- */
-        /* RESPONSIVIDADE */
-        /* ------------------- */
-        @media (max-width: 992px) {
-            .about-content, .contact-content {
-                grid-template-columns: 1fr;
-            }
-            .about-image {
-                order: -1;
-                margin-bottom: 30px;
-            }
-            #quem-somos .about-image {
-                order: -1;
-                margin-bottom: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            html { scroll-padding-top: 70px; }
-            h1 { font-size: 2.5rem; }
-            section { padding: 60px 0; }
-            .main-header { padding: 15px 0; }
-            .main-header.scrolled { padding: 10px 0; }
-            
-            .main-header nav { display: none; }
-
-            .process-steps {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .process-steps {
-                grid-template-columns: 1fr;
-            }
-            .contact-content {
-                gap: 30px;
-            }
-            blockquote::before {
-                left: -15px;
-            }
-        }
-        :root {
-    --color-primary: #1a1a1a;
-    --color-secondary: #f5f5f5;
-    --color-accent: #c5a47e;
-    --color-text: #333;
-    --color-white: #ffffff;
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Montserrat', sans-serif;
-}
-
-* {margin:0; padding:0; box-sizing:border-box;}
-html {scroll-behavior:smooth; scroll-padding-top:80px;}
-body {font-family:var(--font-body); background-color:var(--color-white); color:var(--color-text); line-height:1.6; overflow-x:hidden;}
-.container {max-width:1200px; margin:0 auto; padding:0 20px;}
-h1,h2,h3 {font-family:var(--font-heading); color:var(--color-primary); font-weight:700;}
-section {padding:80px 0; opacity:0; transform:translateY(30px); transition:opacity 0.8s ease-out, transform 0.8s ease-out;}
-section.visible {opacity:1; transform:translateY(0);}
-.cta-button {display:inline-block; background-color:var(--color-accent); color:var(--color-white); padding:12px 25px; text-decoration:none; font-weight:700; border-radius:5px; transition:background-color 0.3s ease, transform 0.3s ease;}
-.cta-button:hover {background-color:#b3926c; transform:translateY(-2px);}
-
-/* Cabeçalho */
-.main-header {position:fixed; top:0; left:0; width:100%; padding:20px 0; z-index:1000; transition:background-color 0.4s ease, padding 0.4s ease;}
-.main-header.scrolled {background-color:rgba(26,26,26,0.9); padding:15px 0; backdrop-filter:blur(5px);}
-.main-header .container {display:flex; justify-content:space-between; align-items:center;}
-.logo {font-family:var(--font-heading); font-size:1.8em; color:var(--color-white); text-decoration:none; font-weight:700;}
-.main-header nav ul {list-style:none; display:flex; gap:30px;}
-.main-header nav a {color:var(--color-white); text-decoration:none; font-weight:500; position:relative; padding-bottom:5px;}
-.main-header nav a::after {content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background-color:var(--color-accent); transition:width 0.3s ease;}
-.main-header nav a:hover::after {width:100%;}
-
-/* Hero */
-#hero {height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; color:var(--color-white); position:relative; padding:0;}
-.video-background {position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; z-index:-2;}
-.video-background video {width:100%; height:100%; object-fit:cover;}
-#hero::after {content:''; position:absolute; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); z-index:-1;}
-.hero-content h1 {font-size:4rem; margin-bottom:20px;}
-.hero-content p {font-size:1.2rem; margin-bottom:30px;}
-
-/* Sobre / Quem Sou */
-.about-content {display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
-.about-text h2 {font-size:2.5rem; margin-bottom:20px;}
-.about-image img {width:100%; height:auto; border-radius:5px;}
-
-/* Portfólio */
-#portfolio {background-color:var(--color-secondary);}
-#portfolio h2 {text-align:center; font-size:2.5rem; margin-bottom:40px;}
-.portfolio-filters {text-align:center; margin-bottom:40px;}
-.filter-btn {background:none; border:1px solid #ccc; padding:10px 20px; margin:0 5px; cursor:pointer; border-radius:5px; transition:all 0.3s ease;}
-.filter-btn:hover, .filter-btn.active {background-color:var(--color-accent); color:var(--color-white); border-color:var(--color-accent);}
-.portfolio-grid {display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px;}
-.portfolio-item {position:relative; overflow:hidden; border-radius:5px; cursor:pointer; display:block;}
-.portfolio-item img {width:100%; display:block; transition:transform 0.4s ease;}
-.portfolio-item:hover img {transform:scale(1.1);}
-.portfolio-item .overlay {position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to top, rgba(0,0,0,0.8), transparent); display:flex; flex-direction:column; justify-content:flex-end; padding:20px; color:var(--color-white); opacity:0; transition:opacity 0.4s ease;}
-.portfolio-item:hover .overlay {opacity:1;}
-.overlay h3, .overlay span {transform:translateY(20px); transition:transform 0.4s ease;}
-.portfolio-item:hover .overlay h3, .portfolio-item:hover .overlay span {transform:translateY(0);}
-
-/* Processo */
-.process-steps {display:grid; grid-template-columns:repeat(4,1fr); gap:30px; text-align:center;}
-.step i {font-size:2.5rem; color:var(--color-accent); margin-bottom:20px;}
-.step h3 {margin-bottom:10px;}
-
-/* Depoimentos */
-#depoimentos {background-color:var(--color-secondary); text-align:center;}
-#depoimentos .container {max-width:800px;}
-blockquote {font-size:1.5rem; font-style:italic; font-family:var(--font-heading); margin-bottom:20px; position:relative;}
-blockquote::before {content:'\f10d'; font-family:'Font Awesome 6 Free'; font-weight:900; color:var(--color-accent); font-size:2rem; position:absolute; top:-20px; left:-30px; opacity:0.5;}
-cite {font-weight:700;}
-
-/* Contato */
-.contact-content {display:grid; grid-template-columns:2fr 1fr; gap:50px; align-items:center;}
-.contact-form input, .contact-form textarea {width:100%; padding:15px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px; font-family:var(--font-body);}
-.contact-form input:focus, .contact-form textarea:focus {outline:none; border-color:var(--color-accent);}
-.contact-form button {width:100%; border:none; cursor:pointer;}
-.contact-info p {margin-bottom:20px; font-size:1.1rem;}
-.contact-info i {color:var(--color-accent); margin-right:15px; width:20px;}
-.social-links a {color:var(--color-primary); font-size:1.5rem; margin-right:20px; transition:color 0.3s ease;}
-.social-links a:hover {color:var(--color-accent);}
-
-/* Rodapé */
-.main-footer {background-color:var(--color-primary); color:var(--color-secondary); text-align:center; padding:20px 0; margin-top:-1px;}
-
-/* Responsividade */
-@media (max-width:992px){
-    .about-content, .contact-content {grid-template-columns:1fr;}
-    .about-image, #quem-somos .about-image {order:-1; margin-bottom:30px;}
-}
-
-@media (max-width:768px){
-    html{scroll-padding-top:70px;}
-    h1{font-size:2.5rem;}
-    section{padding:60px 0;}
-    .main-header{padding:15px 0;}
-    .main-header.scrolled{padding:10px 0;}
-    .main-header nav{display:none;}
-    .process-steps{grid-template-columns:1fr 1fr;}
-}
-
-@media (max-width:576px){
-    .process-steps{grid-template-columns:1fr;}
-    .contact-content{gap:30px;}
-    blockquote::before{left:-15px;}
-    .hero-content h1{font-size:2rem;}
-    .hero-content p{font-size:1rem;}
-    .cta-button{padding:10px 20px;}
-}
-:root {
-    --color-primary: #4B0E1A;   /* Bordô escuro (cabeçalho/rodapé) */
-    --color-secondary: #F8F3F5; /* Fundo suave rosado/cinza claro */
-    --color-accent: #800020;    /* Vinho principal (botões/destaques) */
-    --color-text: #2c2c2c;      /* Texto */
-    --color-white: #ffffff;
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Montserrat', sans-serif;
-}
-
-/* Geral */
-body {
-    font-family: var(--font-body);
-    background-color: var(--color-white);
-    color: var(--color-text);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-/* Botão CTA */
-.cta-button {
-    display: inline-block;
-    background-color: var(--color-accent);
-    color: var(--color-white);
-    padding: 12px 25px;
-    text-decoration: none;
-    font-weight: 700;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-.cta-button:hover {
-    background-color: #66001a; /* tom mais escuro do vinho */
-    transform: translateY(-2px);
-}
-
-/* Cabeçalho */
-.main-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 0;
-    z-index: 1000;
-    transition: background-color 0.4s ease, padding 0.4s ease;
-}
-.main-header.scrolled {
-    background-color: rgba(75, 14, 26, 0.9); /* vinho transparente */
-    padding: 15px 0;
-    backdrop-filter: blur(5px);
-}
-.logo {
-    font-family: var(--font-heading);
-    font-size: 1.8em;
-    color: var(--color-white);
-    text-decoration: none;
-    font-weight: 700;
-}
-.main-header nav a {
-    color: var(--color-white);
-}
-.main-header nav a::after {
-    background-color: var(--color-accent);
-}
-
-/* Seções */
-#portfolio, #depoimentos {
-    background-color: var(--color-secondary);
-}
-.step i {
-    color: var(--color-accent);
-}
-blockquote::before {
-    color: var(--color-accent);
-}
-
-/* Formulário */
-.contact-form input:focus, 
-.contact-form textarea:focus {
-    border-color: var(--color-accent);
-}
-.contact-info i {
-    color: var(--color-accent);
-}
-.social-links a:hover {
-    color: var(--color-accent);
-}
-
-/* Rodapé */
-.main-footer {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    text-align: center;
-    padding: 5px 0; /* reduzido de 20px para 10px */
-    margin-top: -1px;
-    font-size: 0.7rem; /* opcional: deixa o texto levemente menor */
-}
-
-
     </style>
+    <script>
+        // Variáveis globais para controlar o estado e o cooldown
+        let isGenerating = false;
+        const COOLDOWN_DURATION = 30; // 30 segundos
+        let cooldownInterval = null;
+
+        // Credenciais Fixas (MANTIDAS NO CÓDIGO, OCULTAS NA INTERFACE)
+        const CORRECT_USERNAME = 'tulio'; // Usuário atualizado para 'tulio'
+        const CORRECT_PASSWORD = 'teste'; 
+
+        /**
+         * Gera um número aleatório dentro de um intervalo.
+         * @param {number} min - O valor mínimo (inclusivo).
+         * @param {number} max - O valor máximo (inclusivo).
+         * @returns {number} O número aleatório gerado.
+         */
+        function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        /**
+         * Inicia o cronômetro de resfriamento (cooldown) e atualiza o botão.
+         */
+        function startCooldown() {
+            const generateButton = document.getElementById('generateButton');
+            let remainingTime = COOLDOWN_DURATION;
+
+            // Desativa o botão e define o estilo de inatividade
+            generateButton.disabled = true;
+            generateButton.classList.add('opacity-50', 'cursor-not-allowed');
+            
+            // Define o intervalo para o contador regressivo
+            cooldownInterval = setInterval(() => {
+                remainingTime--;
+                
+                if (remainingTime <= 0) {
+                    // Fim do cooldown
+                    clearInterval(cooldownInterval);
+                    cooldownInterval = null;
+                    generateButton.innerHTML = 'GERAR NOVO SINAL';
+                    generateButton.disabled = false;
+                    generateButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                } else {
+                    // Atualiza o contador no botão
+                    generateButton.innerHTML = `AGUARDE ${remainingTime}s`;
+                }
+            }, 1000);
+        }
+
+        /**
+         * Simula a geração do sinal.
+         */
+        function generateSignal() {
+            // Verifica se já está gerando OU em cooldown
+            if (isGenerating || cooldownInterval) {
+                return;
+            }
+
+            const signalMultiplierEl = document.getElementById('signalMultiplier');
+            const confidenceLevelEl = document.getElementById('confidenceLevel');
+            const confidenceBarFillEl = document.getElementById('confidenceBarFill');
+            const generateButton = document.getElementById('generateButton');
+
+            // 1. Iniciar o estado de carregamento
+            isGenerating = true;
+            generateButton.innerHTML = '<div class="loading-animation"></div>';
+            generateButton.disabled = true;
+            generateButton.classList.add('opacity-50', 'cursor-not-allowed');
+            signalMultiplierEl.textContent = '...';
+            confidenceLevelEl.textContent = '...';
+            confidenceBarFillEl.style.width = '0%'; // Resetar barra
+
+            // Simular um atraso de processamento de 1 a 1.8 segundos
+            setTimeout(() => {
+                // 2. Lógica de geração de "Sinal" (Máximo 3.00X)
+                
+                let multiplier;
+                const rng = Math.random();
+
+                if (rng < 0.80) {
+                    // 80% chance: Baixo risco (1.30x a 2.00x)
+                    multiplier = getRandomArbitrary(1.3, 2.0);
+                } else {
+                    // 20% chance: Médio risco (2.01x a 3.00x)
+                    multiplier = getRandomArbitrary(2.01, 3.0);
+                }
+                const multiplierFixed = multiplier.toFixed(2);
+
+                // Nível de confiança ajustado para o novo limite (Max 3.00X)
+                let confidence = 0;
+                if (multiplier < 1.75) {
+                    confidence = getRandomArbitrary(88, 98); // Altíssima confiança
+                } else if (multiplier < 2.5) {
+                    confidence = getRandomArbitrary(75, 87); // Alta confiança
+                } else {
+                    confidence = getRandomArbitrary(60, 74); // Média confiança
+                }
+                const confidenceFixed = confidence.toFixed(0);
+
+                // 3. Exibir resultados e animar barra de confiança
+                signalMultiplierEl.textContent = `${multiplierFixed}X`;
+                confidenceLevelEl.textContent = `${confidenceFixed}%`;
+                confidenceBarFillEl.style.width = `${confidenceFixed}%`;
+
+                // 4. Finalizar o estado de carregamento e iniciar o cooldown
+                isGenerating = false;
+                startCooldown(); // Inicia o cooldown de 30 segundos
+
+            }, getRandomArbitrary(1000, 1800)); 
+        }
+
+        /**
+         * Fecha o modal.
+         */
+        function closeModal() {
+            document.getElementById('infoModal').classList.add('hidden');
+        }
+
+        /**
+         * Função utilitária para mostrar modal com status e mensagem.
+         * @param {string} title - Título do modal.
+         * @param {string} message - Mensagem do modal.
+         * @param {string} status - 'success', 'error', ou 'info'.
+         * @param {function} [callback=null] - Função a ser executada após fechar o modal.
+         */
+        function showCustomModal(title, message, status = 'info', callback = null) {
+            const modal = document.getElementById('infoModal');
+            const modalHeader = document.getElementById('modalHeader');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalButton = document.getElementById('modalButton');
+            const modalBox = document.getElementById('modalBox');
+
+            // Reset classes
+            modalHeader.className = 'text-xl font-bold mb-4 flex items-center';
+            modalMessage.textContent = message;
+            modalButton.onclick = () => {
+                closeModal();
+                if (callback) callback();
+            };
+
+            let iconSvg = '';
+            let textColor = '';
+
+            // Define estilo baseado no status
+            if (status === 'success') {
+                textColor = 'text-green-400';
+                iconSvg = '<svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>';
+            } else if (status === 'error') {
+                textColor = 'text-red-400';
+                iconSvg = '<svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>';
+            } else { // info
+                textColor = 'text-yellow-400';
+                iconSvg = '<svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2h.01a1 1 0 000-2H9z" clip-rule="evenodd"></path></svg>';
+            }
+            
+            modalHeader.classList.add(textColor);
+            modalHeader.innerHTML = iconSvg + title;
+            modal.classList.remove('hidden');
+        }
+
+        /**
+         * Lida com o processo de login usando credenciais fixas.
+         */
+        function handleLogin() {
+            const usernameInput = document.getElementById('username').value;
+            const passwordInput = document.getElementById('password').value;
+            
+            // Verifica as credenciais
+            if (usernameInput === CORRECT_USERNAME && passwordInput === CORRECT_PASSWORD) {
+                // Sucesso
+                showCustomModal(
+                    'Login Bem-sucedido!', 
+                    'Acesso liberado. Você pode começar a usar o gerador de sinais simulados.', 
+                    'success', 
+                    () => {
+                        // Callback após fechar o modal
+                        document.getElementById('loginContainer').classList.add('hidden');
+                        document.getElementById('appContent').classList.remove('hidden');
+                        generateSignal();
+                    }
+                );
+            } else {
+                // Falha
+                showCustomModal(
+                    'Falha no Login', 
+                    'Usuário ou senha incorretos. Verifique suas credenciais.', 
+                    'error'
+                );
+            }
+        }
+
+        // Garante que as funções sejam anexadas após o carregamento da página
+        window.onload = () => {
+            const generateButton = document.getElementById('generateButton');
+            generateButton.addEventListener('click', generateSignal);
+            
+            // Anexa o manipulador de login ao botão
+            document.getElementById('loginButton').addEventListener('click', handleLogin);
+            
+            // Permite login ao apertar ENTER no formulário
+            document.getElementById('loginForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                handleLogin();
+            });
+            
+            // Configura o modal de informação inicial, mas não o exibe mais automaticamente
+            document.getElementById('modalButton').addEventListener('click', closeModal);
+        };
+    </script>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="container">
-            <a href="#hero" class="logo">Zappe Arquitetura</a>
-            <nav>
-                <ul>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#quem-somos">Quem Sou</a></li>
-                    <li><a href="#portfolio">Projetos</a></li>
-                    <li><a href="#processo">Processo</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
+    <!-- Modal de Confirmação e Aviso (Unificado) -->
+    <div id="infoModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 flex items-center justify-center p-4">
+        <div id="modalBox" class="bg-gray-800 rounded-xl p-6 w-full max-w-sm shadow-2xl">
+            <!-- Título com Ícone dinâmico -->
+            <h3 id="modalHeader" class="text-xl font-bold text-red-400 mb-4 flex items-center">
+                <!-- Conteúdo do ícone e título será injetado via JS -->
+            </h3>
+            <p id="modalMessage" class="text-gray-300 text-sm">
+                <!-- Conteúdo da mensagem será injetado via JS -->
+            </p>
+            <button id="modalButton" class="mt-6 w-full btn-primary text-white font-bold py-2 px-4 rounded-lg">
+                Entendi
+            </button>
         </div>
-    </header>
-
-    <section id="hero">
-        <div class="video-background">
-             <video autoplay loop muted playsinline poster="https://images.pexels.com/photos/2088294/pexels-photo-2088294.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
-                <source src="https://videos.pexels.com/video-files/853877/853877-hd_1920_1080_25fps.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="hero-content">
-    <h1>Transformamos ideias em espaços extraordinários.</h1>
-    <p>Design inteligente, beleza atemporal e experiências que inspiram.</p>
-    <a href="#portfolio" class="cta-button">Explore nossos projetos</a>
-</div>
-</section>
-
-
+    </div>
     
-
-    <section id="quem-somos" class="container">
-        <div class="about-content">
-            <div class="about-image">
-                <img src="1.jpg" alt="Arquiteta Zappe">
-            </div>
-            <div class="about-text">
-                <h2>Quem Sou Eu</h2>
-                <p>Olá! Sou Diovanna Zappe Buzatti, arquiteta apaixonada por criar espaços que unem forma e função. Cada projeto que assumo é uma oportunidade de transformar sonhos em realidade, respeitando o estilo, a personalidade e as necessidades de cada cliente.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="portfolio">
-        <div class="container">
-            <h2>Portfólio</h2>
-            <div class="portfolio-filters">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="residencial">Residencial</button>
-                <button class="filter-btn" data-filter="comercial">Comercial</button>
-                <button class="filter-btn" data-filter="interiores">Interiores</button>
-            </div>
-
-            <div class="portfolio-grid">
-                <div class="portfolio-item" data-category="residencial">
-                    <img src="https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Projeto Casa Alphaville">
-                    <div class="overlay">
-                        <h3>Casa Alphaville</h3>
-                        <span>Residencial</span>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="comercial">
-                    <img src="https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Projeto Loja Conceito">
-                    <div class="overlay">
-                        <h3>Loja Conceito</h3>
-                        <span>Comercial</span>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="interiores">
-                    <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Projeto Apartamento Jardins">
-                    <div class="overlay">
-                        <h3>Apartamento Jardins</h3>
-                        <span>Interiores</span>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="residencial">
-                    <img src="https://images.pexels.com/photos/259962/pexels-photo-259962.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Casa do Lago">
-                    <div class="overlay">
-                        <h3>Casa do Lago</h3>
-                        <span>Residencial</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="processo" class="container">
-        <h2>Nosso Processo</h2>
-        <div class="process-steps">
-            <div class="step">
-                <i class="fas fa-comments"></i>
-                <h3>1. Consulta e Briefing</h3>
-                <p>Onde entendemos seus sonhos e necessidades para traçar o caminho do projeto.</p>
-            </div>
-            <div class="step">
-                <i class="fas fa-lightbulb"></i>
-                <h3>2. Estudo e Conceito</h3>
-                <p>Desenvolvemos os primeiros esboços e o conceito criativo que guiará o design.</p>
-            </div>
-            <div class="step">
-                <i class="fas fa-drafting-compass"></i>
-                <h3>3. Projeto Executivo e 3D</h3>
-                <p>Detalhamos a parte técnica e criamos visualizações realistas do resultado final.</p>
-            </div>
-            <div class="step">
-                <i class="fas fa-hard-hat"></i>
-                <h3>4. Acompanhamento da Obra</h3>
-                <p>Garantimos que a execução seja fiel ao projeto, cuidando de cada detalhe.</p>
-            </div>
-        </div>
-    </section>
-    
-    <section id="depoimentos">
-        <div class="container">
-            <h2>O que nossos clientes dizem</h2>
-            <div class="testimonial">
-                <blockquote>
-                    "Eles transformaram nossa casa em um verdadeiro lar. O cuidado com os detalhes e a atenção às nossas necessidades foi impressionante."
-                </blockquote>
-                <cite>- João e Maria S., Projeto Residencial Alphaville</cite>
-            </div>
-        </div>
-    </section>
-
-    <section id="contato" class="container">
-        <h2>Vamos conversar sobre seu projeto?</h2>
-        <div class="contact-content">
-        <form class="contact-form" onsubmit="enviarWhatsApp(event)">
-    <input type="text" id="name" placeholder="Seu nome" required>
-    <input type="email" id="email" placeholder="Seu e-mail" required>
-    <textarea id="message" rows="5" placeholder="Sua mensagem" required></textarea>
-    <button type="submit" class="cta-button">Enviar Mensagem</button>
-</form>
-
-            <div class="contact-info">
-                <p><i class="fas fa-envelope"></i> zappearquitetura@gmail.com</p>
-                <p><i class="fab fa-whatsapp"></i> +55 5599616-1066 </p>
-                <p><i class="fas fa-map-marker-alt"></i> Rigoberto Duarte, nº 65, Santa Maria, RS, Brazil</p>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/zappearquitetura?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="main-footer">
-        <p>&copy; 2025 Gediel Tecnologia . Todos os direitos reservados.</p>
-    </footer>
-<script>
-function enviarWhatsApp(event) {
-    event.preventDefault(); // evita envio padrão do formulário
-
-    const nome = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const mensagem = document.getElementById('message').value;
-
-    const numeroWhatsApp = '5555996161066'; // número correto, sem espaços
-    const texto = `Olá! Meu nome é ${nome} (${email}) e gostaria de entrar em contato: ${mensagem}`;
-    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
-
-    window.open(url, '_blank'); // abre o WhatsApp em nova aba
-}
-</script>
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            // Efeito de scroll no cabeçalho
-            const header = document.querySelector('.main-header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-
-            // Filtro do Portfólio
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-
-                    const filter = button.dataset.filter;
-
-                    portfolioItems.forEach(item => {
-                        if (filter === 'all' || item.dataset.category === filter) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                });
-            });
-
-            // Animação de Fade-in nas seções ao rolar
-            const sections = document.querySelectorAll('section');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-
-        });
+    <!-- CONTEÚDO DE LOGIN -->
+    <div id="loginContainer" class="w-full max-w-md p-6 sm:p-8 rounded-2xl signal-box transition-all duration-300">
+        <h1 class="text-3xl font-extrabold text-center mb-2 text-white">✈️ Acesso Exclusivo</h1>
+        <p class="text-center text-sm mb-8 text-gray-400">Entre com suas credenciais para acessar o simulador de sinais.</p>
         
-    </script>
-    <!-- Botão WhatsApp -->
-<a href="https://wa.me/55996161066" target="_blank" id="whatsappButton">
-    <i class="fab fa-whatsapp"></i>
-</a>
+        <form id="loginForm">
+            <!-- Campo Usuário -->
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-300 mb-1">Usuário</label>
+                <!-- Placeholder profissional -->
+                <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:ring-orange-500 focus:border-orange-500" required>
+            </div>
 
-<style>
-#whatsappButton {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 60px;
-    height: 60px;
-    background-color: #25D366;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-#whatsappButton:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-}
-@media(max-width:576px){
-    #whatsappButton {width:50px; height:50px; font-size:24px; bottom:20px; right:20px;}
-}
-</style>
+            <!-- Campo Senha -->
+            <div class="mb-6">
+                <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Senha</label>
+                 <!-- Placeholder profissional -->
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:ring-orange-500 focus:border-orange-500" required>
+            </div>
+
+            <!-- Botão de Login -->
+            <button type="button" id="loginButton" class="w-full btn-primary text-white font-black text-lg py-4 px-6 rounded-xl uppercase flex items-center justify-center">
+                ENTRAR
+            </button>
+        </form>
+    </div>
+    
+    <!-- CONTEÚDO PRINCIPAL (INICIALMENTE OCULTO) -->
+    <div id="appContent" class="hidden w-full max-w-md p-6 sm:p-8 rounded-2xl signal-box transition-all duration-300">
+        
+        <h1 class="text-3xl font-extrabold text-center mb-2 text-white">✈️ Gerador de Sinais Aviator</h1>
+        <p class="text-center text-sm mb-6 text-gray-400">Análise de probabilidade estatística em tempo real.</p>
+
+        <!-- Seção de Aviso Legal (CRÍTICO) -->
+        <div class="bg-red-900 bg-opacity-30 border border-red-700 p-4 rounded-xl mb-6 shadow-lg">
+            <h2 class="font-bold text-red-300 mb-1 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.427 2.65-1.427 3.414 0l.968 1.801-1.053.567L10 3.82l-1.586.847L7.289 4.9L8.257 3.099zM10 17a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                ATENÇÃO: Limite de Saque $3.00$X
+            </h2>
+            <p class="text-sm text-red-200">
+                Este gerador simula apenas estratégias de baixo risco e exige um **cooldown** de $30$ segundos para nova leitura. Lembre-se, resultados são aleatórios.
+            </p>
+        </div>
+
+        <!-- Painel de Resultados (NOVO LAYOUT) -->
+        <div class="grid grid-cols-1 gap-4 mb-8">
+            
+            <!-- Multiplicador Previsto -->
+            <div class="p-6 result-card rounded-xl text-center shadow-lg">
+                <p class="text-md font-semibold uppercase text-gray-400 mb-2">Multiplicador Previsto (Simulado)</p>
+                <!-- O signal-multiplier tem o efeito neon definido no CSS -->
+                <p id="signalMultiplier" class="text-7xl font-extrabold signal-multiplier">
+                    --X
+                </p>
+            </div>
+
+            <!-- Nível de Confiança com Barra de Progresso -->
+            <div class="p-4 result-card rounded-xl shadow-lg">
+                <div class="flex justify-between items-center mb-2">
+                    <p class="text-md font-semibold uppercase text-gray-400">Nível de Confiança</p>
+                    <p id="confidenceLevel" class="text-xl font-extrabold text-green-400">--%</p>
+                </div>
+                
+                <!-- Barra de Progresso -->
+                <div class="confidence-bar-bg h-3 rounded-full overflow-hidden">
+                    <div id="confidenceBarFill" class="confidence-bar-fill h-full rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão de Ação -->
+        <button id="generateButton" class="w-full btn-primary text-white font-black text-lg py-4 px-6 rounded-xl uppercase flex items-center justify-center">
+            GERAR SINAL
+        </button>
+        
+    </div>
 
 </body>
 </html>
